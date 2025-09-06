@@ -128,7 +128,7 @@ export default function PortfolioSettings() {
       } else {
         toast.error('Personal finance integration configuration is invalid');
       }
-    } catch (error) {
+    } catch {
       setTestResults(prev => ({ ...prev, personalFinance: false }));
       toast.error('Failed to test personal finance connection');
     }
@@ -139,12 +139,13 @@ export default function PortfolioSettings() {
       // Test notification system
       setTestResults(prev => ({ ...prev, notifications: true }));
       toast.success('Notification system is working');
-    } catch (error) {
+    } catch {
       setTestResults(prev => ({ ...prev, notifications: false }));
       toast.error('Failed to test notifications');
     }
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handlePersonalFinanceChange = (key: keyof PersonalFinanceIntegration, value: any) => {
     setPersonalFinance(prev => ({
       ...prev,
@@ -152,6 +153,7 @@ export default function PortfolioSettings() {
     }));
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleNotificationChange = (key: keyof NotificationSettings, value: any) => {
     setNotifications(prev => ({
       ...prev,

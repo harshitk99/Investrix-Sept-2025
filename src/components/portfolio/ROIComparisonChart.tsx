@@ -45,11 +45,13 @@ export default function ROIComparisonChart({ investments }: ROIComparisonChartPr
 
   const COLORS = ['#3B82F6', '#10B981', '#F59E0B', '#EF4444', '#8B5CF6', '#06B6D4'];
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const CustomTooltip = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
       return (
         <div className="bg-gray-800 border border-gray-600 rounded-lg p-3">
           <p className="text-white font-medium">{label}</p>
+          {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
           {payload.map((entry: any, index: number) => (
             <p key={index} className="text-sm" style={{ color: entry.color }}>
               {entry.dataKey}: {entry.value.toFixed(2)}%
@@ -61,6 +63,7 @@ export default function ROIComparisonChart({ investments }: ROIComparisonChartPr
     return null;
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const PieTooltip = ({ active, payload }: any) => {
     if (active && payload && payload.length) {
       const data = payload[0].payload;
@@ -164,11 +167,13 @@ export default function ROIComparisonChart({ investments }: ROIComparisonChartPr
                 label={{ value: 'Value (APT)', angle: -90, position: 'insideLeft' }}
               />
               <Tooltip 
-                content={({ active, payload, label }) => {
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                content={({ active, payload, label }: any) => {
                   if (active && payload && payload.length) {
                     return (
                       <div className="bg-gray-800 border border-gray-600 rounded-lg p-3">
                         <p className="text-white font-medium">{label}</p>
+                        {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                         {payload.map((entry: any, index: number) => (
                           <p key={index} className="text-sm" style={{ color: entry.color }}>
                             {entry.dataKey}: {entry.value.toFixed(2)} APT
@@ -230,7 +235,8 @@ export default function ROIComparisonChart({ investments }: ROIComparisonChartPr
               label={{ value: 'Risk Score', angle: -90, position: 'insideLeft' }}
             />
             <Tooltip 
-              content={({ active, payload, label }) => {
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              content={({ active, payload }: any) => {
                 if (active && payload && payload.length) {
                   const data = payload[0].payload;
                   return (

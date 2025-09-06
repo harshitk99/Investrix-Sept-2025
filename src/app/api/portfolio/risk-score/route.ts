@@ -101,6 +101,7 @@ export async function POST(request: NextRequest) {
   }
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function generateFallbackRiskScore(companyData: any) {
   let riskScore = 5; // Default medium risk
   const riskFactors = [];

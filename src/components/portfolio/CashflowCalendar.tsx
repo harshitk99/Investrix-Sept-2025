@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { CashflowEvent } from "@/types/portfolio";
-import { Calendar, ChevronLeft, ChevronRight, DollarSign, Clock, CheckCircle, AlertTriangle } from "lucide-react";
+import { ChevronLeft, ChevronRight, Clock, CheckCircle, AlertTriangle } from "lucide-react";
 
 interface CashflowCalendarProps {
   events: CashflowEvent[];

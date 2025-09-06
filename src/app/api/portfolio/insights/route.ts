@@ -5,7 +5,7 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || '');
 
 export async function POST(request: NextRequest) {
   try {
-    const { investments, userId } = await request.json();
+    const { investments } = await request.json();
 
     if (!investments || !Array.isArray(investments)) {
       return NextResponse.json({ error: 'Invalid investments data' }, { status: 400 });
@@ -76,6 +76,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Add timestamps and ensure proper formatting
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const formattedInsights = insights.map((insight: any) => ({
       ...insight,
       id: insight.id || `insight-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
@@ -96,6 +97,7 @@ export async function POST(request: NextRequest) {
   }
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function generateFallbackInsights(investments: any[]) {
   const insights = [];
 

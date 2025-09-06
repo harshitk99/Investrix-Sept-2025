@@ -197,6 +197,7 @@ export class PersonalFinanceManager {
 
       const accounts = await accountsResponse.json();
       const totalBalance = accounts.data.accounts.reduce(
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (sum: number, account: any) => sum + (account.balance / 1000), // Convert from milliunits
         0
       );

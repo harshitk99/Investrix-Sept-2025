@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { Bell, Settings, Volume2, VolumeX, Mail, Smartphone, Calendar } from "lucide-react";
+import { Bell, Volume2, VolumeX, Mail, Smartphone, Calendar } from "lucide-react";
 import { NotificationSettings } from "@/types/portfolio";
 
 interface NotificationCenterProps {
@@ -16,6 +16,7 @@ export default function NotificationCenter({
 }: NotificationCenterProps) {
   const [isOpen, setIsOpen] = useState(false);
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleSettingChange = (key: keyof NotificationSettings, value: any) => {
     onSettingsChange({
       ...settings,

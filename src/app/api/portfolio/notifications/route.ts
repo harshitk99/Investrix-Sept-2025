@@ -84,8 +84,9 @@ export async function GET(request: NextRequest) {
   }
 }
 
-// Function to create repayment reminder notifications
-export async function createRepaymentReminder(
+// Helper functions for creating notifications (not exported to avoid Next.js route conflicts)
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+async function createRepaymentReminder(
   userId: string, 
   investmentId: string, 
   companyName: string, 
@@ -124,8 +125,8 @@ export async function createRepaymentReminder(
   }
 }
 
-// Function to create new opportunity notifications
-export async function createOpportunityNotification(
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+async function createOpportunityNotification(
   userId: string,
   opportunityData: {
     companyName: string;
@@ -163,8 +164,8 @@ export async function createOpportunityNotification(
   }
 }
 
-// Function to create risk alert notifications
-export async function createRiskAlert(
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+async function createRiskAlert(
   userId: string,
   investmentId: string,
   companyName: string,

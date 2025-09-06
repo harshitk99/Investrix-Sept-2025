@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth, db } from "@/app/firebase";
@@ -39,20 +39,9 @@ export default function PortfolioDashboard() {
     reminderDaysBefore: 3
   });
   const [isLoading, setIsLoading] = useState(true);
-  const [unreadNotifications, setUnreadNotifications] = useState(3);
+  const [unreadNotifications] = useState(3);
 
-  useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setUserId(user.uid);
-        fetchPortfolioData(user.uid);
-      } else {
-        router.push("/login");
-      }
-    });
-  }, [router]);
-
-  const fetchPortfolioData = async (userId: string) => {
+  const fetchPortfolioData = useCallback(async (userId: string) => {
     try {
       setIsLoading(true);
       
@@ -104,7 +93,7 @@ export default function PortfolioDashboard() {
             monthlyRepayment: investedAmount / tenure + monthlyInterest,
             totalExpectedReturn: investedAmount + (monthlyInterest * tenure),
             repaymentSchedule: generateRepaymentSchedule(startDate, tenure, investedAmount / tenure + monthlyInterest),
-            nextRepaymentDate: getNextRepaymentDate(startDate, tenure)
+            nextRepaymentDate: getNextRepaymentDate(startDate)
           };
 
           userInvestments.push(investment);
@@ -142,7 +131,18 @@ export default function PortfolioDashboard() {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUserId(user.uid);
+        fetchPortfolioData(user.uid);
+      } else {
+        router.push("/login");
+      }
+    });
+  }, [router, fetchPortfolioData]);
 
   const generateRepaymentSchedule = (startDate: Date, tenure: number, monthlyAmount: number) => {
     const schedule = [];
@@ -159,7 +159,7 @@ export default function PortfolioDashboard() {
     return schedule;
   };
 
-  const getNextRepaymentDate = (startDate: Date, tenure: number) => {
+  const getNextRepaymentDate = (startDate: Date) => {
     const now = new Date();
     const monthsElapsed = Math.floor((now.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24 * 30));
     const nextRepayment = new Date(startDate);

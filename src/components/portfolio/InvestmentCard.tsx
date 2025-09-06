@@ -1,7 +1,7 @@
 "use client";
 import { Investment } from "@/types/portfolio";
 import { Button } from "@/components/ui/button";
-import { Calendar, TrendingUp, AlertTriangle, CheckCircle, Clock } from "lucide-react";
+import { Calendar, AlertTriangle, CheckCircle, Clock } from "lucide-react";
 
 interface InvestmentCardProps {
   investment: Investment;
