@@ -410,13 +410,22 @@ export default function InvestorDashboard() {
 
           <h1 className="text-2xl font-bold">Investor Dashboard</h1>
 
-          <Button
-            variant="outline"
-            className="border-white bg-black text-white hover:bg-white hover:text-black"
-            onClick={() => router.push('/dashboard/investor/preferences')}
-          >
-            View Personalised Preferences
-          </Button>
+          <div className="flex gap-4">
+            <Button
+              variant="outline"
+              className="border-white bg-black text-white hover:bg-white hover:text-black"
+              onClick={() => router.push('/dashboard/investor/portfolio')}
+            >
+              View Portfolio
+            </Button>
+            <Button
+              variant="outline"
+              className="border-white bg-black text-white hover:bg-white hover:text-black"
+              onClick={() => router.push('/dashboard/investor/preferences')}
+            >
+              View Personalised Preferences
+            </Button>
+          </div>
         </div>
 
         {connected && account && (
